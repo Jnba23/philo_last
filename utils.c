@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 08:45:27 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/13 19:08:14 by asayad           ###   ########.fr       */
+/*   Updated: 2024/07/22 18:41:45 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	meal_num_opt(t_data *data)
 {
-	bool opt;
+	bool	opt;
 
 	opt = false;
 	if (data->meals_num > 0)
@@ -22,9 +22,10 @@ bool	meal_num_opt(t_data *data)
 	return (opt);
 }
 
-u_int64_t get_current_time()
+u_int64_t	get_current_time(void)
 {
 	struct timeval	tv;
+
 	if (gettimeofday(&tv, NULL) == -1)
 		return (0);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
@@ -36,7 +37,7 @@ void	ft_usleep(u_int64_t tt_sleep)
 
 	start = get_current_time();
 	while (get_current_time() - start < tt_sleep)
-		usleep(50);
+		usleep(500);
 }
 
 long long	ft_atoi(char *str)
@@ -64,22 +65,29 @@ long long	ft_atoi(char *str)
 	return (num * sign);
 }
 
-void	free_ressources(t_data *data)
+void	free_ressources(t_data *data, int i)
 {
-	int	i;
+	int	j;
 
-	i = 0;
-	(void)data;
-	while (i < data->phils_num)
-	{
-		pthread_mutex_destroy(&data->forks_arr[i++]);
-		pthread_mutex_destroy(&data->phils_arr[i].mut_meals_eaten);
-		pthread_mutex_destroy(&data->phils_arr[i].mut_phil_state);
-		pthread_mutex_destroy(&data->phils_arr[i++].mut_last_meal);
-	}
-	pthread_mutex_destroy(&data->print_lock);
+	j = 0;
+	pthread_mutex_destroy(&data->mut_last_meal);
+	pthread_mutex_destroy(&data->mut_meals_eaten);
+	pthread_mutex_destroy(&data->mut_print);
 	pthread_mutex_destroy(&data->mut_iter);
-	free(data->phils_arr);
+	if (i == 2)
+	{
+		while (j < data->phils_num)
+			pthread_mutex_destroy(&data->forks_arr[j++]);
+	}
+	if (i == 1)
+	{
+		while (j < data->phils_num)
+		{
+			pthread_mutex_destroy(&data->forks_arr[j]);
+			if (data->phils_num != 1)
+				pthread_mutex_destroy(&data->phils_arr[j].mut_phil_state);
+			j++;
+		}
+	}
 	free(data->forks_arr);
-	free(data);
 }

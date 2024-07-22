@@ -1,9 +1,9 @@
 #-*-Makefile-*-
 
 CC = cc
-CFLAGS =  -g -Wall -Wextra -Werror -pthread -fsanitize=thread #-fsanitize=address 
+CFLAGS =  -g -Wall -Wextra -Werror -pthread #-fsanitize=thread #-fsanitize=address
 
-SRCM = philo.c parse_init.c run_philos.c phils_funcs.c phils_funcs2.c monitors_funcs.c setters.c getters.c utils.c \
+SRCM = philo.c parse_init.c parse_init2.c run_philos.c phils_funcs.c phils_funcs2.c monitors_funcs.c setters.c getters.c utils.c \
 
 OBJM = $(SRCM:%.c=%.o)
 

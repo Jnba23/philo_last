@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:49:07 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/13 19:11:07 by asayad           ###   ########.fr       */
+/*   Updated: 2024/07/18 15:31:27 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,26 @@ bool	rip(t_philo *p_d)
 {
 	bool	res;
 
+	if (!g_iter(p_d->data))
+		return (0);
 	res = false;
 	if (get_current_time() - g_last_m_t(p_d) >= p_d->data->tt_die
 		&& g_phil_state(p_d) != EATING)
 	{
-		update_phil_state(p_d, DEAD);
+		pthread_mutex_lock(&p_d->mut_phil_state);
+		p_d->phil_state = DEAD;
+		pthread_mutex_unlock(&p_d->mut_phil_state);
 		res = true;
+		pthread_mutex_lock(&p_d->data->mut_iter);
+		p_d->data->iter = false;
+		pthread_mutex_unlock(&p_d->data->mut_iter);
 	}
 	return (res);
 }
 
 void	let_em_know(t_data *data)
 {
-	t_philo *philos;
+	t_philo	*philos;
 	int		p_num;
 	int		i;
 
@@ -36,17 +43,15 @@ void	let_em_know(t_data *data)
 	p_num = data->phils_num;
 	i = -1;
 	while (++i < p_num)
-		set_phil_state(&philos[i], DEAD);
+	{
+		pthread_mutex_lock(&data->phils_arr[i].mut_phil_state);
+		philos[i].phil_state = DEAD;
+	}
 }
 
 void	join_monitors(t_data *data)
 {
-	// int	i;
-
-	// i = -1;
-	// while (++i)
-	// 	pthread_join(data->phils_arr[i].philo, NULL);
-	pthread_join(data->life_monitor, NULL);
 	if (meal_num_opt(data))
 		pthread_join(data->meals_monitor, NULL);
+	pthread_join(data->life_monitor, NULL);
 }
