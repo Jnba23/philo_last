@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 11:07:48 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/22 11:29:49 by asayad           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:46:46 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	run_threads(t_data *data)
 {
 	int	i;
+
 
 	i = -1;
 	pthread_create(&data->life_monitor, NULL, &life_monitoring, data);
@@ -31,12 +32,12 @@ void	run_threads(t_data *data)
 void	*routine(void *phil_data)
 {
 	t_philo		*p_d;
-	u_int64_t	slow_t;
+	// u_int64_t	slow_t;
 
 	p_d = (t_philo *)phil_data;
-	slow_t = p_d->data->tt_eat / 2;
+	// slow_t = p_d->data->tt_eat / 2;
 	if (p_d->philo_id % 2 == 0)
-		ft_usleep(slow_t);
+		usleep(900);
 	while (g_phil_state(p_d) != DEAD && g_phil_state(p_d) != FULL)
 	{
 		eat(p_d);

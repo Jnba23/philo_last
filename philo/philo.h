@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 22:20:04 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/20 05:10:15 by asayad           ###   ########.fr       */
+/*   Updated: 2024/07/26 09:56:59 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ u_int64_t	get_current_time(void);
 void		ft_usleep(u_int64_t tt_sleep);
 bool		meal_num_opt(t_data *data);
 void		free_ressources(t_data *data, int i);
+size_t		ft_strlen(char *s);
 
 /*	getters */
 t_state		g_phil_state(t_philo *data);

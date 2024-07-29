@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 06:37:04 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/22 11:26:14 by asayad           ###   ########.fr       */
+/*   Updated: 2024/07/26 09:58:08 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	digits_only(char *s)
 
 	sign_count = 0;
 	i = 0;
+	if (s[i] == '+' && ft_strlen(s) == 1)
+		return (1);
 	while (s[i])
 	{
 		if (s[i] < 48 || s[i] > 57)
@@ -106,4 +108,14 @@ void	init_philos(t_data *data)
 		data->phils_arr[i].data = data;
 		i++;
 	}
+}
+
+size_t	ft_strlen(char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while(s[i])
+		i++;
+	return (i);
 }
