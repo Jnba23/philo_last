@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 11:07:48 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/25 20:46:46 by asayad           ###   ########.fr       */
+/*   Updated: 2024/08/01 10:51:25 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	run_threads(t_data *data)
 {
 	int	i;
-
 
 	i = -1;
 	pthread_create(&data->life_monitor, NULL, &life_monitoring, data);
@@ -32,10 +31,8 @@ void	run_threads(t_data *data)
 void	*routine(void *phil_data)
 {
 	t_philo		*p_d;
-	// u_int64_t	slow_t;
 
 	p_d = (t_philo *)phil_data;
-	// slow_t = p_d->data->tt_eat / 2;
 	if (p_d->philo_id % 2 == 0)
 		usleep(900);
 	while (g_phil_state(p_d) != DEAD && g_phil_state(p_d) != FULL)
@@ -67,8 +64,7 @@ void	*life_monitoring(void *data)
 			pthread_mutex_lock(&d->mut_print);
 			printf("%llu %d died\n",
 				get_current_time() - philos[i].last_meal, philos[i].philo_id);
-			let_em_know(d);
-			break ;
+			return (let_em_know(d), NULL);
 		}
 		if (i == p_num - 1)
 			i = -1;
@@ -91,10 +87,11 @@ void	*meals_monitoring(void *data)
 	{
 		if (!g_iter(d))
 			break ;
-		if (g_meals_eaten(&philos[i]) > d->meals_num)
+		if (g_meals_eaten(&philos[i]) >= d->meals_num)
 		{
 			pthread_mutex_lock(&philos[i].mut_phil_state);
 			philos[i].phil_state = FULL;
+			pthread_mutex_unlock(&philos[i].mut_phil_state);
 			if (i == p_num - 1)
 				set_iter(d, false);
 			i++;

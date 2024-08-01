@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 11:09:13 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/18 15:29:35 by asayad           ###   ########.fr       */
+/*   Updated: 2024/08/01 10:55:44 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ t_state	g_phil_state(t_philo *data)
 	return (state);
 }
 
-u_int64_t	g_start_t(t_philo *p_d)
+long long	g_start_t(t_philo *p_d)
 {
-	u_int64_t	t;
+	long long	t;
 
 	t = p_d->data->start_time;
 	return (t);
 }
 
-u_int64_t	g_last_m_t(t_philo *p_d)
+long long	g_last_m_t(t_philo *p_d)
 {
-	u_int64_t	l_m_t;
+	long long	l_m_t;
 
 	pthread_mutex_lock(&p_d->data->mut_last_meal);
 	l_m_t = p_d->last_meal;

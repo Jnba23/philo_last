@@ -6,44 +6,31 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 03:32:32 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/29 23:57:08 by asayad           ###   ########.fr       */
+/*   Updated: 2024/07/30 17:19:32 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <semaphore.h>
-#include <sys/wait.h>
-#include <limits.h>
-#include <stdbool.h>
-#include <pthread.h>
-#include <signal.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/time.h>
-#include <stdatomic.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <semaphore.h>
+# include <sys/wait.h>
+# include <limits.h>
+# include <stdbool.h>
+# include <pthread.h>
+# include <signal.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <stdatomic.h>
 
 # define FORK_TAKEN "has taken a fork\n"
 # define EAT "is eating\n"
 # define SLEEP "is sleeping\n"
 # define THINK "is thinking\n"
 # define DIED "died\n"
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-typedef enum state
-{
-	EATING,
-	SLEEPING,
-	THINKING,
-	DEAD,
-	// FULL,
-	STANDBY,
-} t_state;
 
 typedef struct philo
 {
@@ -53,7 +40,6 @@ typedef struct philo
 	int					meals_eaten;
 	pthread_t			monitor;
 	struct data			*data;
-	_Atomic t_state		state;
 }	t_philo;
 
 typedef struct data
@@ -83,7 +69,6 @@ char		*ft_strjoin(char *s1, char *s2);
 size_t		ft_strlen(char *s);
 size_t		ft_strlcpy(char *dst, char *src, size_t dstsize);
 size_t		ft_strlcat(char *dst, char *src, size_t dstsize);
-// char		*ft_itoa(int n); // remove 
 u_int64_t	get_current_time(void);
 void		ft_usleep(u_int64_t tt_sleep);
 char		*ft_strjoin(char *s1, char *s2);
@@ -95,13 +80,7 @@ void		take_forks(t_philo *p_data);
 void		eat(t_philo *p_data);
 void		p_sleep(t_philo *p_data);
 void		think(t_philo *p_data);
-int			print_msg(t_philo *p_data, char *msg);
-// void		*ft_calloc(size_t count, size_t size);
-// void		*ft_memset(void *b, int c, size_t len);
+int			print_msg(t_philo *p_data, char *msg, int dead);
 int			ft_strcmp(char *s1, char *s2);
-void		wait_philos(t_data *data);
+void		check_philo_exit(t_data *data);
 #endif
-
-
-// check exit status, if exit -> 2; waitpid ();
-//					if exit -> 1; kill processes

@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 08:45:27 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/29 23:15:43 by asayad           ###   ########.fr       */
+/*   Updated: 2024/07/30 16:00:39 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,5 @@ size_t	ft_strlen(char *s)
 		i++;
 		s++;
 	}
-	return(i);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	while (*s1 != '\0' || *s2 != '\0')
-	{
-		if (*s1 != *s2)
-		{
-			return ((unsigned char)(*s1) - (unsigned char)(*s2));
-		}
-		s1++;
-		s2++;
-		i++;
-	}
-	return (0);
+	return (i);
 }

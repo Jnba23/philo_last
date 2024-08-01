@@ -6,19 +6,14 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:49:07 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/22 10:35:58 by asayad           ###   ########.fr       */
+/*   Updated: 2024/08/01 10:57:40 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void f()
-{
-	system("leaks philo");
-}
 int	main(int ac, char **av)
 {
-	// atexit(f);
 	t_data	data;
 	int		i;
 

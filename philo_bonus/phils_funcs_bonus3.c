@@ -6,38 +6,35 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 20:24:44 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/29 20:33:11 by asayad           ###   ########.fr       */
+/*   Updated: 2024/07/30 16:53:01 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	wait_philos(t_data *data)
+void	check_philo_exit(t_data *data)
 {
 	int	i;
 	int	e_val;
+	int	full_phil_num;
 
 	i = 0;
+	full_phil_num = 0;
 	while (1)
+	{
+		if (waitpid(data->philos[i].pid, &e_val, WNOHANG) != 0)
 		{
-			while (i < data->phils_num)
+			if (WIFEXITED(e_val) && WEXITSTATUS(e_val) == 21)
+				return (kill_processes(data, i + 1));
+			else if (WIFEXITED(e_val) && WEXITSTATUS(e_val) == 42)
 			{
-				waitpid(data->philos[i].pid, &e_val, WNOHANG);
-				if (WIFEXITED(e_val))
-				{
-					if (WEXITSTATUS(e_val) == 2)
-						return (kill_processes(data, data->philos[i - 1].philo_id), free_ressources(data));
-					if (WEXITSTATUS(e_val) == 1)
-					{
-						i++;
-						if (i == data->phils_num)
-							i = 0;
-						continue ;
-					}
-					i++;
-					if (i == data->phils_num)
-						i = 0;
-				}
+				full_phil_num++;
+				if (full_phil_num == data->phils_num)
+					break ;
 			}
 		}
+		i++;
+		if (i == data->phils_num)
+			i = 0;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 03:51:29 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/26 09:55:49 by asayad           ###   ########.fr       */
+/*   Updated: 2024/07/30 17:14:50 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_args(int ac, char **av)
 	while (i < ac)
 	{
 		if (digits_only(av[i]) == 1 || ft_atoi(av[i]) > INT_MAX
-			|| ft_atoi(av[i]) < 0)
+			|| ft_atoi(av[i]) < 0 || ft_strlen(av[i]) == 0)
 			return (1);
 		i++;
 	}

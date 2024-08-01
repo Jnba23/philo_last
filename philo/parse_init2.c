@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 06:37:04 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/18 15:42:26 by asayad           ###   ########.fr       */
+/*   Updated: 2024/07/30 16:04:11 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,14 @@ int	init_forks(t_data *data)
 		i++;
 	}
 	return (0);
+}
+
+size_t	ft_strlen(char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

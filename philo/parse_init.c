@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 06:37:04 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/26 09:58:08 by asayad           ###   ########.fr       */
+/*   Updated: 2024/08/01 09:42:23 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_args(int ac, char **av)
 	while (i < ac)
 	{
 		if (digits_only(av[i]) == 1 || ft_atoi(av[i]) > INT_MAX
-			|| ft_atoi(av[i]) < 0)
+			|| ft_atoi(av[i]) < 0 || ft_strlen(av[i]) == 0)
 			return (1);
 		i++;
 	}
@@ -57,15 +57,17 @@ int	init_data(t_data *data, int ac, char **av)
 	data->meals_num = -1;
 	data->iter = true;
 	data->phils_num = ft_atoi(av[1]);
-	data->tt_die = (u_int64_t)ft_atoi(av[2]);
-	data->tt_eat = (u_int64_t)ft_atoi(av[3]);
-	data->tt_sleep = (u_int64_t)ft_atoi(av[4]);
-		if (ac == 6)
-		{
-			if (ft_atoi(av[5]) == 0)
-				return (2);
-			data->meals_num = ft_atoi(av[5]);
-		}
+	if (ft_atoi(av[1]) == 0)
+		return (2);
+	data->tt_die = ft_atoi(av[2]);
+	data->tt_eat = ft_atoi(av[3]);
+	data->tt_sleep = ft_atoi(av[4]);
+	if (ac == 6)
+	{
+		if (ft_atoi(av[5]) == 0)
+			return (2);
+		data->meals_num = ft_atoi(av[5]);
+	}
 	data->start_time = get_current_time();
 	if (pthread_mutex_init(&data->mut_last_meal, NULL) != 0)
 		return (1);
@@ -108,14 +110,4 @@ void	init_philos(t_data *data)
 		data->phils_arr[i].data = data;
 		i++;
 	}
-}
-
-size_t	ft_strlen(char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while(s[i])
-		i++;
-	return (i);
 }

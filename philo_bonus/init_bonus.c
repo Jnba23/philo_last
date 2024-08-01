@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 05:12:22 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/29 20:29:58 by asayad           ###   ########.fr       */
+/*   Updated: 2024/08/01 11:02:58 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	init_data(t_data *data, int ac, char **av)
 	time = get_current_time();
 	data->meals_num = -1;
 	data->phils_num = ft_atoi(av[1]);
+	if (data->phils_num == 0)
+		return (1);
 	data->tt_die = (u_int64_t)ft_atoi(av[2]);
 	data->tt_eat = (u_int64_t)ft_atoi(av[3]);
 	data->tt_sleep = (u_int64_t)ft_atoi(av[4]);
@@ -48,6 +50,5 @@ void	init_philos(t_data *data)
 		data->philos[i].last_meal = data->start_time;
 		data->philos[i].data = data;
 		data->philos[i].meals_eaten = 0;
-		data->philos[i].state = STANDBY;
 	}
 }

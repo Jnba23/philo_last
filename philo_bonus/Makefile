@@ -1,10 +1,10 @@
 #-*-Makefile-*-
 
 CC = cc
-CFLAGS =  -g -Wall -Wextra -Werror #-fsanitize=thread #-fsanitize=thread 
+CFLAGS =  -g -Wall -Wextra -Werror #-fsanitize=thread #-fsanitize=address
 
 SRCM = philo_bonus.c parse_bonus.c init_bonus.c phils_funcs_bonus.c phils_funcs_bonus2.c \
-		semaphores.c \
+		phils_funcs_bonus3.c semaphores.c \
 		utils_bonus.c utils_bonus2.c \
 
 OBJM = $(SRCM:%.c=%.o)
@@ -14,7 +14,7 @@ SRCB =
 OBJB = $(SRCB:%.c=%.o)
 
 #binaries :
-NAME = philo
+NAME = philo_bonus
 BONUS = 
 HEADER_MAN = philo_bonus.h
 HEADER_BON = 

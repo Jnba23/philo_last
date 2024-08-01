@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 08:45:27 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/22 18:41:45 by asayad           ###   ########.fr       */
+/*   Updated: 2024/08/01 09:43:33 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	meal_num_opt(t_data *data)
 	return (opt);
 }
 
-u_int64_t	get_current_time(void)
+long long	get_current_time(void)
 {
 	struct timeval	tv;
 
@@ -31,9 +31,9 @@ u_int64_t	get_current_time(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-void	ft_usleep(u_int64_t tt_sleep)
+void	ft_usleep(long long tt_sleep)
 {
-	u_int64_t	start;
+	long long	start;
 
 	start = get_current_time();
 	while (get_current_time() - start < tt_sleep)

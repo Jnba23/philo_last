@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 22:20:04 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/26 09:56:59 by asayad           ###   ########.fr       */
+/*   Updated: 2024/08/01 11:39:03 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct philo
 {
 	pthread_t			philo;
 	int					philo_id;
-	u_int64_t			last_meal; // initialize to current time
+	long long			last_meal; // initialize to current time
 	int					meals_eaten;
 	t_state				phil_state;
 		/* philo's mutexes */
@@ -63,10 +63,10 @@ typedef struct philo
 typedef struct data
 {
 	int					phils_num;
-	u_int64_t			start_time;
-	u_int64_t			tt_die;
-	u_int64_t			tt_eat;
-	u_int64_t			tt_sleep;
+	long long			start_time;
+	long long			tt_die;
+	long long			tt_eat;
+	long long			tt_sleep;
 	int					meals_num;
 	t_philo				*phils_arr;
 	pthread_mutex_t		*forks_arr;
@@ -93,16 +93,16 @@ int			init_forks(t_data *data);
 void		init_philos(t_data *data);
 
 /*	Utils	*/
-u_int64_t	get_current_time(void);
-void		ft_usleep(u_int64_t tt_sleep);
+long long	get_current_time(void);
+void		ft_usleep(long long tt_sleep);
 bool		meal_num_opt(t_data *data);
 void		free_ressources(t_data *data, int i);
 size_t		ft_strlen(char *s);
 
 /*	getters */
 t_state		g_phil_state(t_philo *data);
-u_int64_t	g_start_t(t_philo *p_d);
-u_int64_t	g_last_m_t(t_philo *p_d);
+long long	g_start_t(t_philo *p_d);
+long long	g_last_m_t(t_philo *p_d);
 bool		g_iter(t_data	*data);
 int			g_meals_eaten(t_philo *p_d);
 

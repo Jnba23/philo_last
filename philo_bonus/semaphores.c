@@ -6,7 +6,7 @@
 /*   By: asayad <asayad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 04:59:16 by asayad            #+#    #+#             */
-/*   Updated: 2024/07/29 20:30:18 by asayad           ###   ########.fr       */
+/*   Updated: 2024/07/30 15:46:01 by asayad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,5 @@ int	create_semaphores(t_data *data)
 	data->sem_stdout = sem_open("/sem_stdout", O_CREAT, 644, 1);
 	if (data->sem_stdout == SEM_FAILED)
 		return (perror("sem error"), 1);
-	// data->sem_end = sem_open("/sem_end", O_CREAT, 644, 1);
-	// if (data->sem_end == SEM_FAILED)
-	// 	return (perror("sem error"), 1);
-	// unlink_philos_sem(data);
 	return (0);
 }
-
-// void	unlink_philos_sem(t_data *data)
-// {
-// 	int		i;
-// 	char	*name;
-
-// 	i = 0;
-// 	while (i < data->phils_num)
-// 	{
-// 		name = ft_strjoin("/sem_philo_", ft_itoa(i + 1));
-// 		unlink(name);
-// 		free(name);
-// 		i++;
-// 	}
-// }
