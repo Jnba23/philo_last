@@ -20,9 +20,15 @@ The program must follow the rules:
 ---
 
 ## 🛠️ Build and Run
-
+- For the mandatory part (Threads) :
 ```bash
 make
 #./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_meals]
 ./philo 5 800 200 200
+```
+- For the bonus part (Semaphores):
+```bash
+make bonus
+#./philo_bonus number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_meals]
+./philo_bonus 5 800 200 200
 ```
